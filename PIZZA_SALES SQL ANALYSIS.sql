@@ -33,6 +33,40 @@ FROM pizza_sales
 GROUP BY pizza_category
 ORDER BY "Total Sales" DESC;
 
---7. 
+--7. Total sale by Pizza Name.
+SELECT pizza_name, SUM(total_sale) AS "Total Sales"
+FROM pizza_sales
+GROUP BY pizza_name
+ORDER BY "Total Sales" DESC;
 
---
+--8. Total order by Pizza Name
+SELECT pizza_name, SUM(quantity) AS "Total Quantity Ordered"
+FROM pizza_sales
+GROUP BY pizza_name
+ORDER BY "Total Quantity Ordered" DESC;
+
+--9. Total Quantity Ordered by Month.
+SELECT EXTRACT(MONTH FROM order_date) AS Month, SUM(quantity) AS "Total quantity Ordered"
+FROM pizza_sales
+GROUP BY Month
+ORDER BY "Total quantity Ordered" DESC;
+
+--10. Total Quantity Ordered by Day and Month.
+SELECT EXTRACT(DAY FROM order_date) AS Day,EXTRACT (MONTH FROM order_date) AS Month, SUM(quantity) AS "Total quantity Ordered"
+FROM pizza_sales
+GROUP BY Day, Month
+ORDER BY "Total quantity Ordered" DESC;
+
+--11. Total Quantity order by Month and pizza_category
+SELECT EXTRACT(MONTH FROM order_date) AS Month, pizza_category, SUM(quantity) AS "Total quantity Ordered"
+FROM pizza_sales
+GROUP BY Month, pizza_category
+ORDER BY Month, pizza_category DESC;
+
+--12. Total Quantity order by Hour.
+SELECT EXTRACT(HOUR FROM order_time) AS Time,pizza_category, SUM(quantity) AS "Total quantity Ordered"
+FROM pizza_sales
+GROUP BY Time, pizza_category
+ORDER BY "Total quantity Ordered" DESC;
+
+--END OF THE ANALYSIS--
